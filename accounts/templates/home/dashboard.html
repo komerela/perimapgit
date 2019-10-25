@@ -1,0 +1,52 @@
+{% extends "home/home.html" %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-3">
+
+        <div class="alert alert-info col-sm-12">
+            <p>Welcome back {{user.username}}</p>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4>0</h4>
+                    <p>Perimeters</p>
+                    <a href="/perimeters/" class="small">Explore</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4>0</h4>
+                    <p>Guards</p>
+                    <a href="/perimeters/" class="small">Explore</a>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4>0</h4>
+                    <p>Patrols</p>
+                    <a href="/perimeters/" class="small">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

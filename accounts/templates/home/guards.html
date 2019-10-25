@@ -1,0 +1,53 @@
+{% extends "home/home.html" %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-3">
+
+        <div class="col-sm-12">
+            <a href="/perimeters/create/" class="btn btn-sm btn-success float-right">create perimeter</a>
+        </div>
+
+        <div class="col-sm-12 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Guards</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Patrols</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+
+                        {% for guard in object_list  %}
+
+                        <tr>
+                            <td>{{guard.id}}</td>
+                            <td>{{guard.username}}</td>
+                            <td>{{guard.email}}</td>
+                            <td>0</td>
+                            <td>
+                                <a href="" class="badge badge-success">edit</a>
+                                <a href="" class="badge badge-warning">patrols</a>
+                                <a href="" class="badge badge-warning">remove</a>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% extends "home/home.html" %}
+
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-sm-3 border-right">
+                <h5>{{perimeter.name}} Perimeter floors</h5>
+                <a href="/floors/create/{{perimeter.id}}">Create new</a>
+                <ul>
+                   {% for floor in floors %}
+                        <li>{{floor.name}}</li>
+                   {% endfor %}
+                </ul>
+
+            </div>
+            <div class="col-sm-9">
+                <h5>Perimeter checkpoints</h5>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Floor</th>
+                            <th>Barcode</th>
+                            <th>Geolocation</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        {% for checkpoint in checkpoints %}
+
+                            <tr>
+                                <td>{{checkpoint.id}}</td>
+                                <td>{{checkpoint.floor}}</td>
+                                <td>{{checkpoint.bar_code}}</td>
+                                <td>{{checkpoint.geo_location}}</td>
+                            </tr>
+                            
+                        {% endfor %}
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

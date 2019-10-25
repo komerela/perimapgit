@@ -1,0 +1,42 @@
+{% extends "home/home.html" %}
+
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-3">
+
+        <div class="col-sm-12">
+            <a href="/perimeters/" class="btn btn-sm btn-success float-right">back to perimeters</a>
+        </div>
+
+        <div class="col-sm-12">
+            <form action='/perimeters/create/' method='post'>
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field.errors }}
+                {{ hidden_field }}
+                {% endfor %}
+
+                {% for field in form.visible_fields %}
+
+                <div class="form-group">
+                    <label for="">{{ field.label_tag }}</label>
+                    {% render_field field class="form-control" %}
+                    <span class="help-text">{{ field.help_text }}</span>
+                    <span class="text-error">{{ field.errors }}</span>
+                </div>
+
+                {% endfor %}
+                <input class="btn btn-primary" type="submit" value="Submit" />
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

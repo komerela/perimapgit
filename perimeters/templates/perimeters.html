@@ -1,0 +1,54 @@
+{% extends "home/home.html" %}
+
+
+{% block content %}
+
+	<div class="container">
+		<div class="row mt-3">
+
+			<div class="col-sm-12">
+				<a href="/perimeters/create/" class="btn btn-sm btn-success float-right">create perimeter</a>
+			</div>
+
+			<div class="col-sm-12 mt-3">
+				<div class="card">
+					<div class="card-header">
+						<h4>Perimeter</h4>
+					</div>
+					<div class="card-body">
+						<table class="table">
+							<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Patrols</th>
+								<th>Floors</th>
+								<th>Action</th>
+							</tr>
+							</thead>
+
+							{% for peri in object_list  %}
+
+							<tr>
+								<td>{{peri.id}}</td>
+								<td>{{peri.name}}</td>
+								<td>0</td>
+								<td>0</td>
+								<td>
+									<a href="" class="badge badge-success">edit</a>
+									<a href="" class="badge badge-warning">patrols</a>
+									<a href="/perimeters/view/{{peri.id}}" class="badge badge-primary">view</a>
+
+								</td>
+							</tr>
+
+							{% endfor %}
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+{% endblock content %}

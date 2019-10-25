@@ -1,0 +1,6 @@
+django
+djangorestframework
+markdown
+django-filter
+django-widget-tweaks
+djangorestframework_simplejwt
