@@ -5,7 +5,6 @@
 ## Usage:
 
 ** Go to the domain ![Website](https://www.perimap.site)
-** or you can check the domain https://104.154.99.195/
 
 ** Register a user account
 ** Login Using your unique username and password
