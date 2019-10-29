@@ -1,5 +1,5 @@
 from django.test import TestCase
-from accounts.models import CustomUser 
+from models import CustomUser 
 # Create your tests here.
 
 class CustomUserTestCase(TestCase):

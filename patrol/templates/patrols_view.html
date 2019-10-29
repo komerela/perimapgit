@@ -1,0 +1,55 @@
+{% extends "home/home.html" %}
+
+{% block styles %}
+
+<style type="text/css">
+    #map {
+        height: 500px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+    }
+</style>
+
+{% endblock styles %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-3">
+
+        <div class="col-sm-3 border-right">
+            <h6>Patrol statistics</h6>
+            
+
+
+        </div>
+
+        <div class="col-sm-9">
+
+
+            <div id="map">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+    <script type="text/javascript">
+        window.map = null
+        window.peri_path=null
+
+        function initMap() {
+            window.map = new google.maps.Map(document.getElementById('map'), {zoom: 15});
+        }
+    </script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdlsrGzx4fQJYmWMNmA5NRZafuXX4lR14&callback=initMap">
+    </script>
+
+{% endblock scripts %}

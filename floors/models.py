@@ -13,3 +13,6 @@ class Floor(models.Model):
 
     class Meta:
         pass
+
+    def __str__(self):
+    	return "Floor {}".format(self.name)

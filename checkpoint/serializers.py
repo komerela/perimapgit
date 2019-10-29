@@ -6,3 +6,8 @@ class CheckPointSerializer(serializers.ModelSerializer):
 		model = CheckPoint
 		#fields in the model
 		fields = ['perimeter','bar_code','geo_location','floor']
+
+	def serialize(self):
+		return {
+			'location':self.geo_location
+		}

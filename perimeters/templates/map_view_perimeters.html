@@ -1,0 +1,125 @@
+{% extends "home/home.html" %}
+
+{% load widget_tweaks %}
+
+{% block styles %}
+
+    <style type="text/css">
+        .floors-list li{
+            border-bottom: 1px solid whitesmoke;
+        }
+
+        .floors-list{
+            list-style: none;
+            margin-left: 0px !important;
+            padding-inline-start: 0px;
+            padding-bottom: 5px;
+            padding-top: 3px;
+
+        }
+
+        #map {
+            height: 500px;  /* The height is 400 pixels */
+            width: 100%;  /* The width is the width of the web page */
+        }
+    </style>
+    
+{% endblock styles %}
+
+
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-sm-3 border-right">
+                <h6>{{perimeter.name}} Perimeter floors</h6>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="small">
+                            Floors distinguish points that are geometrically(Vertically on the same position)
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-12">
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <ul class="floors-list">
+                            {% for floor in floors %}
+                            <li>{{floor.name}}
+                                <p> <a href="javascript:;" onclick="openFloorCheckpoints({{floor.id}})" class="small text-danger"><i class="fa fa-eye"></i> view floor points</a></p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-9">
+
+                <div id="map">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+<script type="text/javascript">
+    window.map = null
+    window.peri_path=null
+
+    function initMap() {
+        window.map = new google.maps.Map(document.getElementById('map'), {zoom: 15});
+    }
+
+    function openFloorCheckpoints(floor_id) {
+        let url='/checkpoints/floor_checkpoints/'+floor_id
+        axios.get(url)
+            .then(res=>{
+
+                if(window.peri_path!=null)window.peri_path.setMap(null)
+
+                let path=[]
+                $.each(res.data.checkpoint_list, function(key,checkpoint){
+                    let point={lat:checkpoint.location[0],lng:checkpoint.location[1]}
+                    path.push(point)
+
+                })
+
+                window.peri_path = new google.maps.Polyline({
+                    path: path,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+
+                peri_path.setMap(window.map);
+                /*
+                update the center of the map to the first coordinate
+                 */
+                var first_location=new google.maps.LatLng(path[0])
+                window.map.setCenter(first_location)
+
+
+            })
+    }
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdlsrGzx4fQJYmWMNmA5NRZafuXX4lR14&callback=initMap">
+</script>
+
+{% endblock scripts %}

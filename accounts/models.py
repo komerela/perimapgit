@@ -8,5 +8,5 @@ class CustomUser(AbstractUser):
 	phone_number = models.CharField(
 		max_length= 12,
 	)
-	guard_for=models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete = models.SET_NULL)
+	guard_for=models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete = models.SET_NULL,related_name='owner')
 

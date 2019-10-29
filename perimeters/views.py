@@ -38,3 +38,28 @@ class PerimeterDetailView(DetailView):
 
 	    return context
 
+class PerimeterDetailMapView(DetailView):
+	"""docstring for PerimeterDetailMapView"""
+	template_name = "map_view_perimeters.html"
+	model = Perimeter
+
+	def get_context_data(self, **kwargs):
+	    context = super(PerimeterDetailMapView, self).get_context_data(**kwargs)
+	    perimeter = Perimeter.objects.get(pk = self.kwargs['pk'])
+	    context['floors'] = Floor.objects.filter(perimeter=perimeter)
+	    return context
+
+class PerimeterDetailQrView(DetailView):
+	"""docstring for PerimeterDetailQrView"""
+	template_name = "qr_view_perimeters.html"
+	model = Perimeter
+
+	def get_context_data(self, **kwargs):
+	    context = super(PerimeterDetailQrView, self).get_context_data(**kwargs)
+	    perimeter = Perimeter.objects.get(pk = self.kwargs['pk'])
+	    context['checkpoints'] = CheckPoint.objects.filter(perimeter=perimeter)
+	    return context
+		
+	
+		
+

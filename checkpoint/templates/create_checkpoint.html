@@ -1,0 +1,110 @@
+{% extends "home/home.html" %}
+
+{% load widget_tweaks %}
+
+{% block styles %}
+
+    <style type="text/css">
+        #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+    
+{% endblock styles %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-3">
+
+        <div class="col-sm-12">
+            <a href="/perimeters" class="btn btn-sm btn-success float-right">back to perimeters</a>
+        </div>
+
+        <div class="col-sm-6">
+            <form action='/checkpoints/create/{{perimeter.id}}/' method='post'>
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field.errors }}
+                {{ hidden_field }}
+                {% endfor %}
+
+                {% for field in form.visible_fields %}
+
+                <div class="form-group">
+                    <label for="">{{ field.label_tag }}</label>
+                    {% render_field field class="form-control" %}
+                    <span class="help-text small">{{ field.help_text }}</span>
+                    <span class="text-error">{{ field.errors }}</span>
+                </div>
+
+                {% endfor %}
+                <input class="btn btn-primary" type="submit" value="Submit" />
+            </form>
+        </div>
+
+        <div class="col-sm-6">
+            <div id="map"></div>
+
+              </div>
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+    <script type="text/javascript">
+        window.map = null
+
+        function initMap() {
+              // The location of Uluru
+              var uluru = {lat: -25.344, lng: 131.036};
+              // The map, centered at Uluru
+              window.map = new google.maps.Map(
+                  document.getElementById('map'), {zoom: 15, center: uluru});
+              // The marker, positioned at Uluru
+              var marker = new google.maps.Marker({position: uluru, map: map});
+            }
+
+
+        var x = document.getElementById("demo");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            console.log("Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude);
+
+            /*
+            update the map with the users current location
+            */
+            var my_location=new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
+            window.map.setCenter(my_location)
+            var marker = new google.maps.Marker({position: my_location, map: window.map});
+
+            $('#id_latitude').val(position.coords.latitude)
+            $('#id_longitude').val(position.coords.longitude)
+
+
+        }
+
+        $(function () {
+            getLocation()
+        })
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdlsrGzx4fQJYmWMNmA5NRZafuXX4lR14&callback=initMap">
+    </script>
+    
+{% endblock scripts %}

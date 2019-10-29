@@ -4,3 +4,5 @@ markdown
 django-filter
 django-widget-tweaks
 djangorestframework_simplejwt
+django-generic-json-views
+django-qr-code

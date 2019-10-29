@@ -1,19 +1,27 @@
-from django.db import models
 from django.conf import settings
-from django.contrib.gis.db import models as gis_models
+from django.contrib.gis.db import models
 
 
 # Create your models here.
 
-class CheckPoint(gis_models.Model):
-    """
-    Description: Model Description
-    """
-    
-    perimeter = models.ForeignKey('perimeters.Perimeter', null=True, blank=True, on_delete = models.CASCADE)
-    bar_code = models.CharField(null=True, blank=True, max_length=255)
-    geo_location = gis_models.PointField(null=True, blank=True, max_length=255)
-    floor = models.ForeignKey('floors.Floor', null=True, blank=True, on_delete = models.CASCADE)
+class CheckPoint(models.Model):
+	"""
+	Description: Model Description
+	"""
+	
+	perimeter = models.ForeignKey('perimeters.Perimeter', null=True, blank=True, on_delete = models.CASCADE)
+	bar_code = models.CharField(null=True, blank=True, max_length=255)
+	geo_location = models.PointField(null=True, blank=True, max_length=255)
+	floor = models.ForeignKey('floors.Floor',help_text='The perimeter floor is essential to ditinguish points that are geometrically ontop of each other', null=True, blank=True, on_delete = models.CASCADE)
 
-    class Meta:
-        pass
+	class Meta:
+		pass
+
+	def __str__(self):
+		return self.perimeter.name
+
+	def serialize(self):
+		return {
+			'location':self.geo_location,
+			'bar_code':self.bar_code
+		}

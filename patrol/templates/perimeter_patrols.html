@@ -1,0 +1,39 @@
+{% extends "home/home.html" %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row mt-3">
+
+        <div class="col-sm-12">
+            <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Time/Date</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="small">
+
+                            {% for patrol in perimeter.patrols.all  %}
+
+                            <tr>
+                                <td>{{patrol.id}}</td>
+                                <td>{{patrol.time}}</td>
+                                <td>
+                                    <a href="/patrol/detail_view/{{patrol.id}}" class="badge badge-primary">view</a>
+
+                                </td>
+                            </tr>
+
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
