@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from api.router import router
 from django.conf.urls import url, include
-from accounts.views import RegisterView
+from accounts.views import signup
 from .views import WelcomeView
 from rest_framework_simplejwt import views as jwt_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
@@ -28,7 +30,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
 
     #routes for login and register
-    path('register/',RegisterView.as_view()),
+    path('register/',signup),
     path('',WelcomeView.as_view()),
     path('', include('django.contrib.auth.urls')),
 
@@ -44,4 +46,4 @@ urlpatterns = [
 
 
 
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

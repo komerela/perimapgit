@@ -17,7 +17,7 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <h4>0</h4>
+                    <h4>{{user.user_perimeters.count}}</h4>
                     <p>Perimeters</p>
                     <a href="/perimeters/" class="small">Explore</a>
                 </div>
@@ -27,9 +27,9 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <h4>0</h4>
+                    <h4>{{user.owner.count}}</h4>
                     <p>Guards</p>
-                    <a href="/perimeters/" class="small">Explore</a>
+                    <a href="/accounts/guards/" class="small">Explore</a>
 
                 </div>
             </div>
@@ -39,8 +39,8 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <h4>0</h4>
-                    <p>Patrols</p>
+                    <p>{{user.last_login}}</p>
+                    <p>Last login</p>
                     <a href="/perimeters/" class="small">Explore</a>
                 </div>
             </div>

@@ -5,23 +5,27 @@ from .models import CustomUser
 from django.contrib.auth import authenticate, login
 from perimeters.models import Perimeter
 from django.urls import reverse
+from django.views.generic.base import RedirectView
+from django.shortcuts import render, redirect
+
+
 
 # Create your views here.
 
-class RegisterView(CreateView):
-	template_name="register.html"
-	form_class = CustomUserCreationForm
-	model = CustomUser
-	def form_valid(self, form):
-		user = form.save()
-		user = authenticate(username=form.cleaned_data['username'],
-									password=form.cleaned_data['password1'],
-									)
-		login(self.request,user)
-		return super().form_valid(form)
 
-	def get_success_url(self):
-		return reverse('accounts:home')
+def signup(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('accounts:home')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'register.html', {'form': form})
 
 
 class HomeView(TemplateView):
@@ -32,5 +36,14 @@ class GuardsView(ListView):
 	model = CustomUser
 	def get_queryset(self):
 		return CustomUser.objects.filter(guard_for=self.request.user)
+
+class RemoveGuardsView(RedirectView):
+	permanent = False
+	def get_redirect_url(self, *args, **kwargs):
+		user = CustomUser.objects.get(pk=kwargs['pk'])
+		user.guard_for=None
+		user.save()
+		return reverse('accounts:guards')
+
 
 		

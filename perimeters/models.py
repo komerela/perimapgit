@@ -7,7 +7,7 @@ class Perimeter(models.Model):
     """
     Description: Perimeter model with user & name
     """
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete = models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete = models.CASCADE,related_name='user_perimeters')
     name = models.CharField(null=True, blank=True, max_length=100)
     
 

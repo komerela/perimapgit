@@ -12,17 +12,17 @@
 
 			<div class="col-sm-12 mt-3">
 				<div class="card">
-					<div class="card-header">
-						<h4>Perimeter</h4>
-					</div>
+
 					<div class="card-body">
-						<table class="table">
+						<p>Perimeters for different properties displayed here</p>
+						<table class="table small">
 							<thead>
 							<tr>
 								<th>Id</th>
 								<th>Name</th>
 								<th>Patrols</th>
 								<th>Floors</th>
+								<th>Checkpoints</th>
 								<th>Action</th>
 							</tr>
 							</thead>
@@ -32,12 +32,12 @@
 							<tr>
 								<td>{{peri.id}}</td>
 								<td>{{peri.name}}</td>
-								<td>0</td>
-								<td>0</td>
+								<td>{{peri.patrols.count}}</td>
+								<td>{{peri.floors.count}}</td>
+								<td>{{peri.perimeter_checkpoints.count}}</td>
 								<td>
-									<a href="" class="badge badge-success">edit</a>
-									<a href="" class="badge badge-warning">patrols</a>
-									<a href="/perimeters/view/{{peri.id}}" class="badge badge-primary">view</a>
+									<a href="/patrol/view/{{peri.id}}" class="badge badge-warning p-1"><i class="fa fa-fire"></i> patrols</a>
+									<a href="/perimeters/view/{{peri.id}}" class="badge p-1 badge-primary"><i class="fa fa-eye"></i> view</a>
 
 								</td>
 							</tr>

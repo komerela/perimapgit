@@ -51,7 +51,7 @@
                         <ul class="floors-list">
                             {% for floor in floors %}
                             <li>{{floor.name}}
-                                <p><a href="" class="small">delete</a> | <a href="" class="small">edit</a></p>
+                                <p><a href="/floors/delete/{{floor.id}}" class="small">delete</a> | <a href="/floors/edit/{{floor.id}}" class="small">edit</a></p>
                             </li>
                             {% endfor %}
                         </ul>
@@ -62,7 +62,7 @@
             <div class="col-sm-9">
                 <h5>Perimeter checkpoints <a class="btn btn-sm btn-outline-success ml-2 float-right" href="/perimeters/map_view/{{perimeter.id}}/"> <i class="fa fa-globe"></i> Map View</a>
                     <a class="btn btn-sm btn-outline-primary ml-2 float-right" href="/perimeters/qr_view/{{perimeter.id}}/"><i class="fa fa-qrcode"></i> Qr codes</a>
-                    <a class="btn btn-sm btn-outline-warning float-right" href="/checkpoints/create/{{perimeter.id}}/">Create perimeter</a>
+                    <a class="btn btn-sm btn-outline-warning float-right" href="/checkpoints/create/{{perimeter.id}}/">Create checkpoint</a>
                 </h5>
 
                 <table class="table mt-3 table-sm">
@@ -84,7 +84,7 @@
                                 <td>{{checkpoint.bar_code}}</td>
                                 <td>{{checkpoint.geo_location}}</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="/checkpoints/delete/{{checkpoint.id}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             

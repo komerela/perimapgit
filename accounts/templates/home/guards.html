@@ -7,16 +7,15 @@
     <div class="row mt-3">
 
         <div class="col-sm-12">
-            <a href="/perimeters/create/" class="btn btn-sm btn-success float-right">create perimeter</a>
         </div>
 
         <div class="col-sm-12 mt-3">
             <div class="card">
-                <div class="card-header">
-                    <h5>Guards</h5>
-                </div>
+
                 <div class="card-body">
-                    <table class="table">
+                    <p>Authorized perimeters guards</p>
+                    <p class="small">To add a guard, request the administrator to assign a perimap user under your guard ship</p>
+                    <table class="table small">
                         <thead>
                         <tr>
                             <th>Id</th>
@@ -33,11 +32,9 @@
                             <td>{{guard.id}}</td>
                             <td>{{guard.username}}</td>
                             <td>{{guard.email}}</td>
-                            <td>0</td>
+                            <td>{{guard.user_patrols.count}}</td>
                             <td>
-                                <a href="" class="badge badge-success">edit</a>
-                                <a href="" class="badge badge-warning">patrols</a>
-                                <a href="" class="badge badge-warning">remove</a>
+                                <a href="/accounts/remove_guards/{{guard.id}}" class="badge p-1 badge-danger"><i class="fa fa-trash"></i> remove</a>
                             </td>
                         </tr>
 

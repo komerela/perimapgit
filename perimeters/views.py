@@ -11,6 +11,10 @@ class PerimetersView(ListView):
     template_name = "perimeters.html"
     model = Perimeter
 
+    def get_queryset(self):
+    	return Perimeter.objects.filter(user=self.request.user)
+
+
 class PerimeterCreateView(CreateView):
 	template_name = "create_perimeters.html"
 	model = Perimeter

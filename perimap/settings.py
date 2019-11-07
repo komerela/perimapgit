@@ -134,8 +134,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "staticfiles")
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 LOGIN_REDIRECT_URL='/accounts/home/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Database
@@ -149,3 +154,14 @@ if 'DJANGO_DEVELOPMENT' in os.environ:
         from .prod import *
 else:
     from .prod import *
+
+
+    #Rest framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+TOKEN_EXPIRED_AFTER_SECONDS=860000
+
+    

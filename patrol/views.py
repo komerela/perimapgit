@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
+from json_views.views import JSONListView
 from perimeters.models import Perimeter
 from .models import Patrol
+from patrolpoint.models import PatrolPoint
 
 # Create your views here.
 
@@ -22,4 +24,5 @@ class PatrolView(DetailView):
 	    context = super(PatrolView, self).get_context_data(**kwargs)
 	    return context
 
-# class PatrolPoints():
+class PatrolPoints(JSONListView):
+	model = PatrolPoint
